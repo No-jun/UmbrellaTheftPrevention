@@ -33,7 +33,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-# get channel_secret and channel_access_token from your environment variable
+# LINEBotのアクセストークンとチャネルシークレットを''内にいれてください
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 if channel_secret is None:
@@ -70,12 +70,12 @@ def callback():
 
         message = event.message.text
         reply = event.message.text
-        if message.count('開錠'):
+        if message.count('open'):
             function.unlock()
-            reply = "開錠しました"
-        elif message.count('施錠'):
+            reply = "opened"
+        elif message.count('close'):
             function.lock()
-            reply = "施錠しました"
+            reply = "closed"
 
         line_bot_api.reply_message(
             event.reply_token,
